@@ -4,17 +4,21 @@
 
 /*
 CS148: reference code has functions for:
+*/
+function matrix_multiply(){}
+function matrix_transpose(){}
 
-matrix_multiply
-matrix_transpose
+/*
 matrix_pseudoinverse (assuming numeric.inv)
 vector_normalize
-vector_cross
-generate_identity
-generate_translation_matrix
-generate_rotation_matrix_X
-generate_rotation_matrix_Y
-generate_rotation_matrix_Z
-*/
+vector_cross*/
+
+function generate_identity(){} /* 4*4 */
+function generate_translation_matrix(){}
+function generate_rotation_matrix_X(){}
+function generate_rotation_matrix_Y(){}
+function generate_rotation_matrix_Z(){}
 
 
+
+	

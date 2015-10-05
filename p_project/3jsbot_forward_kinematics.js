@@ -11,10 +11,33 @@
 
 /*
 CS148: reference code has functions for:
+*/
+function robot_forward_kinematics(){
 
-robot_forward_kinematics
-traverse_forward_kinematics_link
-traverse_forward_kinematics_joint
+
+
+}
+
+function traverse_forward_kinematics_link(){
+
+
+
+
+}
+
+function traverse_forward_kinematics_joint(){
+
+
+
+
+	
+}
+
+
+
+
+
+/*
 compute_and_draw_heading
 */
 

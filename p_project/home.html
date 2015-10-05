@@ -1,6 +1,5 @@
 
 <!--
-
      3jsbot code stencil
      Implementation of robot kinematics, control, and decision making 
      in HTML5/JavaScript and threejs
@@ -34,13 +33,13 @@
 
 <!-- definition of robot kinematics -->
 <!-- CS148: change this script pointer to change the robot definition -->
-
-<script src="robots/robot_urdf_example.js"></script> <!--
+<script src="robots/robot_urdf_example.js"></script>
+<!--
 <script src="robots/robot_crawler.js"></script> 
---><!--
 <script src="robots/robot_br2.js"></script> 
 -->
- <!-- definition of robot's world (ie, planning scene)  -->
+
+<!-- definition of robot's world (ie, planning scene)  -->
 <!--
 <script src="worlds/world_empty.js"></script> 
 <script src="worlds/world_basic.js"></script> 
@@ -50,21 +49,24 @@
 -->
  
 <!-- 3jsbot includes -->
-<script src="3jsbot.js"></script> 
-<script src="3jsbot_threejs.js"></script> 
-<script src="3jsbot_userinput.js"></script> 
-<!-- FK/drawing assignment 
+<script src="3jsbot.js"></script>
+<script src="3jsbot_threejs.js"></script>
+<script src="3jsbot_userinput.js"></script>
+
+<!-- FK/drawing assignment -->
 <script src="3jsbot_forward_kinematics.js"></script> 
 <script src="3jsbot_matrix.js"></script> 
--->
+
 <!-- FK/joint control assignment 
 <script src="3jsbot_quaternion.js"></script> 
 <script src="3jsbot_controls.js"></script> 
 <script src="3jsbot_pd_control.js"></script> 
 -->
+
 <!-- IK assignment 
 <script src="3jsbot_inverse_kinematics.js"></script> 
 -->
+
 <!-- planning assignment 
 <script src="3jsbot_rrt_connect.js"></script> 
 <script src="3jsbot_collision.js"></script> 
@@ -78,11 +80,11 @@
 
 // 3jsbot uses init() to initialize threejs scene, user input, and robot kinematics
 // CS148: you should use my_init() instead
-init();
+my_init();
 
 // 3jsbot uses animate() as the main animation loop maintained by threejs 
 // CS148: you should use my_animate() instead
-animate();
+my_animate();
 
 
 
@@ -190,6 +192,8 @@ function init_robot_joints() {
         console.log(robot.joints[x].child); // to print the child link of joints for example
 
         // CONSTRUCT KINEMATIC HIERARCHY
+
+
     }
 
     // CS148: do not remove, this is used to create threejs geometries
@@ -273,7 +277,7 @@ function my_animate() {
     // DRAW ROBOT 
 
     // forward kinematics over robot links
-    //robot_forward_kinematics();
+    robot_forward_kinematics();
 
     // HANDLE USER CONTROLS
 
