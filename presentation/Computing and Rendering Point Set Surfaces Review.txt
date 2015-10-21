@@ -2,11 +2,11 @@ EECS 598-010: Interactive Robot Manipulators
 Resarch Paper Review
 
 Title: Computing and Rendering Point Set Surfaces
-Authors: Marc Alexa, Johannes Behr, Daniel Cohen-Or, Shachar Fleishman, David Levin, Claudio T. Silv[a]
-[Publication Venue]
+Authors: Marc Alexa, Johannes Behr, Daniel Cohen-Or, Shachar Fleishman, David Levin, Claudio T. Silva
+Publication Venue: IEEE TVCG 9(1) Jan 2003
 
 Reviewer: Jiatao Fan
-[Presentation Date]
+Presentation Date: October 14th, 2015
 
 In this paper, the authors' novel contribution is that they raise a new concept of 
 representing shapes with point sets. First[,] they present a new definition of 
