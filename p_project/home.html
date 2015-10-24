@@ -34,10 +34,9 @@
 
 <!-- definition of robot kinematics -->
 <!-- CS148: change this script pointer to change the robot definition -->
-<script src="robots/robot_urdf_example.js"></script>
-
-<!--<script src="robots/robot_crawler.js"></script>
-<script src="robots/robot_br2.js"></script> -->
+<!--<script src="robots/robot_urdf_example.js"></script>-->
+<!--<script src="robots/robot_crawler.js"></script>-->
+<script src="robots/robot_br2.js"></script>
 
 
 <!-- definition of robot's world (ie, planning scene)  -->
@@ -63,9 +62,8 @@
 <script src="3jsbot_controls.js"></script> 
 <!-- <script src="3jsbot_pd_control.js"></script> -->
 
-<!-- IK assignment 
+<!-- IK assignment -->
 <script src="3jsbot_inverse_kinematics.js"></script> 
--->
 
 <!-- planning assignment 
 <script src="3jsbot_rrt_connect.js"></script> 
@@ -204,7 +202,11 @@ function my_animate() {
     */
 
     // inverse kinematics
-    //robot_inverse_kinematics(ik_target, "forearm_right_yaw", ik_local);
+    ik_local = [[0],
+                [0],
+                [0.5],
+                [1]];
+    robot_inverse_kinematics(ik_target, "forearm_right_yaw", ik_local);
 
     // configuration space motion planning
     /*
