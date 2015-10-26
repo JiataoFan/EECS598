@@ -5,6 +5,10 @@
 /*
 CS148: reference code has functions for:
 */
+
+/*
+Matrix multiplication
+*/
 function matrix_multiply(matrixA, matrixB) {
 	
 	var productMatrix = [];
@@ -37,6 +41,9 @@ function matrix_multiply(matrixA, matrixB) {
 	
 }
 
+/*
+Matrix transpose
+*/
 function matrix_transpose(matrix) {
 	
 	var transposeMatrix = [];
@@ -61,6 +68,9 @@ function matrix_transpose(matrix) {
 matrix_pseudoinverse (assuming numeric.inv)
 */
 
+/*
+Normalize a vector
+*/
 function vector_normalize(vector) {
 	
 	var normalizedVector = [];
@@ -85,6 +95,9 @@ function vector_normalize(vector) {
 	
 }
 
+/*
+The cross product of two vectors
+*/
 function vector_cross(vectorA, vectorB) {
 	
 	var crossProduct = [];
@@ -97,6 +110,9 @@ function vector_cross(vectorA, vectorB) {
 	
 }
 
+/*
+Generate identity matrix
+*/
 function generate_identity() {
 	
 	var identityMatrix = [
@@ -110,6 +126,9 @@ function generate_identity() {
 
 }
 
+/*
+Generate translation matrix based on local position
+*/
 function generate_translation_matrix(x, y, z) {
 	
 	var translation_matrix = generate_identity();
@@ -122,6 +141,9 @@ function generate_translation_matrix(x, y, z) {
 	
 }
 
+/*
+Generate rotation matrix according to x demension
+*/
 function generate_rotation_matrix_X(theta) {
 	
 	var rotationMatrix = generate_identity();
@@ -135,6 +157,9 @@ function generate_rotation_matrix_X(theta) {
 	
 }
 
+/*
+Generate rotation matrix according to y demension
+*/
 function generate_rotation_matrix_Y(theta) {
 	
 	var rotationMatrix = generate_identity();
@@ -148,6 +173,9 @@ function generate_rotation_matrix_Y(theta) {
 	
 }
 
+/*
+Generate rotation matrix according to z demension
+*/
 function generate_rotation_matrix_Z(theta) {
 	
 	var rotationMatrix = generate_identity();

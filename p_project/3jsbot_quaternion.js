@@ -5,6 +5,10 @@
 /*
 CS148: reference code has functions for:
 */
+
+/*
+Generate quaternion from rotation angle
+*/
 function quaternion_from_axisangle(currentJoint) {
 	
 	var quaternion = [];
@@ -24,6 +28,9 @@ function quaternion_from_axisangle(currentJoint) {
 
 }
 
+/*
+Normalize a quaternion
+*/
 function quaternion_normalize(quaternion) {
 	
 	var normalizedQuaternion = [];
@@ -48,6 +55,9 @@ function quaternion_normalize(quaternion) {
 
 }
 
+/*
+Quaternion multiplication
+*/
 function quaternion_multiply(quaternionA, quaternionB) {
 	
 	var productQuaternion = [];
@@ -76,6 +86,9 @@ function quaternion_multiply(quaternionA, quaternionB) {
 
 }
 
+/*
+Generate motor rotation matrix via quaternion
+*/
 function quaternion_to_rotation_matrix(quaternion) {
 	
 	var rotationMatrix = generate_identity();
