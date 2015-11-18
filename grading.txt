@@ -3,9 +3,11 @@
 Preparatory project: COMPLETED\n
 Paper review/presentation 1: COMPLETED\n
   paper: Oct 14 - Alexa et al. - Point Set Surfaces... 
-Paper review/presentation 2: PENDING\n
+Paper review/presentation 2: COMPLETED\n
   paper: Nov 9 - ten Pas and Platt  - Handle-like Grasp Affordances...
-Final project proposal: PENDING\n
+Final project proposal: DUE\n
+  missing: what will be accomplished for Nov 30 intermediate milestone?\n
+  comment: the overall proposal looks good.  it is recommended that identification of graspable locations is implemented for Nov 30, with robot control left for the final deadline on Dec 14\n
 Final project milestone: PENDING\n
 Final project presentation: PENDING\n
 \n
