@@ -8,6 +8,7 @@ Paper review/presentation 2: COMPLETED\n
 Final project proposal: DUE\n
   missing: what will be accomplished for Nov 30 intermediate milestone?\n
   comment: the overall proposal looks good.  it is recommended that identification of graspable locations is implemented for Nov 30, with robot control left for the final deadline on Dec 14\n
+  note: graded file from Jordan Lee repository\n
 Final project milestone: PENDING\n
 Final project presentation: PENDING\n
 \n
