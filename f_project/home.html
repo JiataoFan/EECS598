@@ -1,0 +1,240 @@
+<!--
+     3jsbot code stencil
+     Implementation of robot kinematics, control, and decision making 
+     in HTML5/JavaScript and threejs
+     
+     @author odestcj / https://github.com/odestcj
+
+     Forgive my coding style.  I am still a typedef struct kind of guy.
+     Need to get a handle on all of the global variables... in the future.
+-->
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+<body>
+
+<!-- //////////////////////////////////////////////////
+     /////     JAVASCRIPT INCLUDES
+     ////////////////////////////////////////////////// -->
+
+<!-- threejs - https://github.com/mrdoob/three.js/ - for 3D rendering -->
+<script src="js/three.min.js"></script>
+
+<!-- threejs camera controls helpers -->
+<script src="js/TrackballControls.js"></script>
+<script src="js/OrbitControls.js"></script>
+
+<!-- threejs keyboard input helper -->
+<script src="js/THREEx.KeyboardState.js"></script>
+
+<!-- numericjs - https://github.com/sloisel/numeric - for matrix inversion -->
+<script src="js/numeric-1.2.6.js"></script>
+
+<!-- definition of robot kinematics -->
+<!-- CS148: change this script pointer to change the robot definition -->
+<script src="robots/robot_urdf_example.js"></script>
+
+<!--<script src="robots/robot_crawler.js"></script>
+<script src="robots/robot_br2.js"></script> -->
+
+
+<!-- definition of robot's world (ie, planning scene)  -->
+<!--
+<script src="worlds/world_empty.js"></script> 
+<script src="worlds/world_basic.js"></script> 
+<script src="worlds/world_s.js"></script> 
+<script src="worlds/world_random.js"></script> 
+<script src="worlds/world_local_minima.js"></script> 
+-->
+ 
+<!-- 3jsbot includes -->
+<script src="3jsbot.js"></script>
+<script src="3jsbot_threejs.js"></script>
+<script src="3jsbot_userinput.js"></script>
+
+<!-- FK/drawing assignment -->
+<script src="3jsbot_forward_kinematics.js"></script> 
+<script src="3jsbot_matrix.js"></script> 
+
+<!-- FK/joint control assignment -->
+<script src="3jsbot_quaternion.js"></script> 
+<script src="3jsbot_controls.js"></script> 
+<!-- <script src="3jsbot_pd_control.js"></script> -->
+
+<!-- IK assignment 
+<script src="3jsbot_inverse_kinematics.js"></script> 
+-->
+
+<!-- planning assignment
+<script src="3jsbot_rrt_connect.js"></script>
+<script src="3jsbot_collision.js"></script> 
+-->
+<script src="eight_objects.pcd.js"></script>
+
+<script>
+
+//////////////////////////////////////////////////
+/////     MAIN FUNCTION CALLS
+//////////////////////////////////////////////////
+
+// 3jsbot uses init() to initialize threejs scene, user input, and robot kinematics
+// CS148: you should use my_init() instead
+init();
+
+// 3jsbot uses animate() as the main animation loop maintained by threejs 
+// CS148: you should use my_animate() instead
+animate();
+
+// CS148: my_animate is where your robot's controls and movement are updated over time
+function my_init() {
+
+    init_robot();  // initialize robot kinematics
+
+}
+
+
+function init_robot() {
+        
+    // ASSUME: robot kinematics are described separate js file (eg., "robot_urdf_example.js")
+
+    // initialize and create threejs mesh objects for robot links
+    init_robot_links();
+
+    // initialize robot joints and create threejs mesh objects for robot joints and form kinematic hiearchy
+    init_robot_joints();
+
+    // initialize inverse kinematics target location 
+    ik_target = [[0],[0.8],[1.0],[1]];
+
+    /* uncomment for motion planning execution (motion planning)
+    // initialize flags for executing planner
+    generating_motion_plan = false; 
+    generate_motion_plan = false; 
+    */
+
+    /* uncomment for collision testing with world (motion planning)
+    // set scene for planner
+    robot_set_planning_scene();
+    */
+
+}
+
+// CS148: nothing to add here 
+function init_robot_links() {
+
+    for (x in robot.links) {
+        robot.links[x].name = x;
+    }
+
+    // CS148: do not remove, this is used to create threejs geometries
+    init_robot_links_geoms();
+
+    // initialize controls for robot base link
+    robot.control = {xyz: [0,0,0], rpy:[0,0,0]};
+
+}
+
+
+// CS148: add kinematic hierarchy in this function
+function init_robot_joints() {
+    // build kinematic hierarchy by looping over each joint in the robot
+    //   (object fields can be index through array-style indices, object[field] = property)
+    //   and insert threejs scene graph (each joint and link are directly connect to scene root)
+    // NOTE: kinematic hierarchy is maintained independently by this code, not threejs
+    // NOTE: simpleApplyMatrix can be used to set threejs transform for a rendered object
+
+    var x,tempmat;
+
+     for (x in robot.joints) {
+
+        // give the joint its name as an id
+        robot.joints[x].name = x;
+        console.log(robot.joints[x].child); // to print the child link of joints for example
+
+        // initialize joint angle value and control input value
+        robot.joints[x].angle = 0;
+        robot.joints[x].control = 0;
+
+        // associate this joint with its child link in the kinematic hierarchy
+        robot.links[robot.joints[x].child].parent = x;
+
+        // associate this joint (as a child) of its parent link in the kinematic hierarchy
+        if (typeof robot.links[robot.joints[x].parent].children === 'undefined') {
+            // create this array if this joint is the first encountered child
+            robot.links[robot.joints[x].parent].children = [];
+        }
+        robot.links[robot.joints[x].parent].children.push(x);
+    }
+
+    // CS148: do not remove, this is used to create threejs geometries
+    init_robot_joints_geoms();
+
+}
+
+//////////////////////////////////////////////////
+/////     ANIMATION AND INTERACTION LOOP
+//////////////////////////////////////////////////
+
+// CS148: my_animate is where your robot's controls and movement are updated over time
+function my_animate() {
+ 
+    // ROBOT DYNAMICS 
+
+    // apply robot controls to robot configuration (assuming pure kinematics for now)
+    robot_apply_controls();
+
+    // DRAW ROBOT 
+
+    // forward kinematics over robot links
+    robot_forward_kinematics();
+
+    // HANDLE USER CONTROLS
+
+    // handle user input 
+    user_input();
+
+    // UPDATE AUTONOMOUS CONTROLS 
+
+    // proportional-derivative control 
+    /*
+    if (update_pd)
+        robot_pd_control();
+    update_pd = false;
+    */
+
+    // inverse kinematics
+    //robot_inverse_kinematics(ik_target, "forearm_right_yaw", ik_local);
+
+    // configuration space motion planning
+    /*
+    if ((generate_motion_plan) && (!generating_motion_plan)) {
+        robot_rrt_planner_init();
+        generating_motion_plan = true;
+        generate_motion_plan = false;
+    }
+    if (generating_motion_plan) {
+        rrt_result = robot_rrt_planner_iterate();
+        if (rrt_result === "reached") {
+            generating_motion_plan = false;
+        }
+    }
+    */
+
+}
+
+/*
+var randomMatrix1 = [[23, 34, 45, 65], [2, 23, 34, 23], [1, 3, 3, 54], [34, 45, 65, 67]];
+var randomMatrix2 = [[12, 123, 32, 4], [324, 435, 34, 63], [34, 545, 6, 456], [234, 43, 5, 6]];
+var random = matrix_multiply(randomMatrix1, randomMatrix2)
+for(var x = 0; x < random.length; x++){
+for(var y = 0; y < random[0].length; y++){
+console.log(random[x][y]);
+}
+}*/
+
+</script>
+</body>
+</html>
+
