@@ -1,0 +1,52 @@
+EECS 598-010: Interactive Robot Manipulators
+Resarch Paper Review
+
+Title: Localizing Handle-Like Grasp Affordances in 3D Point Clouds
+Authors: Andreas ten Pas and Robert Platt
+Publication Venue: ISRR, 2014
+
+Reviewer: Jiatao Fan
+Presentation Date: November 9th, 2015
+
+In this paper, the authors' novel contribution is that they come up with a new
+approach to find object geometries that can be grasped by a particular robot hand
+via searching through a 3-D point cloud for neighborhoods that satisfy conditions
+for existence of a grasp affordance. The goal of this approach only localizes 
+parts of objects rather than the entire object to find types of grasp affordances 
+quickly and reliably. First, the approach randomly samples spherical point 
+neighborhoods approximately two or three cm in radius. It fits an implicit 
+polynomial surface, which can be represented by a quadratic function, to each 
+of these point neighborhoods with the least squares algebraic fit in Taubin 
+normalization. Next, it obtains an accurate measurement of the magnitudes and axes 
+of principal surface curvature in the point neighborhoods and projects the 
+point neighborhoods onto a plane orthogonal to the axis of minor principal 
+curvature. Then, based on the center of a fitted circle to the projected points, 
+the method constructs a cylindrical shell to enclose the object surface. 
+The "gap" between of the inner and the outer surface of the shell is to accommodate 
+the "thumb and fingers" of robot hand. Apart from the algorithm, the authors 
+also present experiment results to demonstrate the robustness of their approach in 
+signle-object scenarios and show the time consumption of each procedure. At last, 
+through experimental data, the authors also illustrate that sequential importance
+sampling with maximum value is the most efficient one. 
+
+In my point of view, the authors clearly explain the process to approximate the 
+object suface and construct enveloping grasp affordance. The algorithm is very
+efficient and runs in real time: only takes 1.7 seconds to execute with 20,000 
+sample neighborhoods. The method has high robustness and was strenthened by the 
+authors from many aspects. For example, the authors raise an effective method 
+to overcome the problem that some reflective object sufaces are hard for the 
+range sensor to perceive. It searches for sets of enveloping grasp affordances 
+that form "handles", or in other word, sets of affordances that are roughly 
+aligned and that cover some minimum length. This helps reduce the number of false 
+positives and increases the precision of the affordances. Besides, the algorithm's 
+precision is also enhanced by the sequential importance sampling method that 
+samples a fixed number of point neighborhoods in a series of rounds.
+
+The brute-force search for handles occupied the most of the total running time,
+so as the authors indicate, possible future direction for this work may be finding 
+a closed-form approximation to the brute-force search that would reduce running time.
+Besides, in the single-object experiments, nearly all grasp failures were because 
+of depth measurement errors or because of insufficient point density on object 
+surfaces in the neighborhood of the false positive. Therefore, I think another 
+possible future job is to figure out how to improve the accuracy of depth measurement 
+and do upsamling uniformly around the area with insufficient point density.
