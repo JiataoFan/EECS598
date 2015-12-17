@@ -1,0 +1,43 @@
+			Final Project Proposal
+
+Jiatao Fan, Jordan Lee
+
+	Intro, Method
+
+	In this final project, we are going to implement the algorithm of Localizing Handle-Like Grasp Affordance in 3D Point Clouds raised by Andreas Ten Pas and Robert Platt.
+	The primary goal of our project is to formulate the conditions of an object that can be grasped by the Fetch robot in our lab and then search through a 3-D point cloud for neighborhoods that satisfy these conditions for existence of a graspable target. Our implementation will only localize parts of objects rather than the entire object to find only types of grasp affordances that form “handles”, in order to enhance the accuracy and reliability of the robot behaviors.
+	First, we collect data for the Fetch robot hand and draw the conditions of the enveloping grasp affordance that fits in the robot hand. Second, starting with a point clouds of objects, we randomly sample point neighborhoods. After that, we fit an implicit quadratic function to each of the point neighborhoods with a least squares algebraic fit with Taubin normalization. Next, we obtain an accurate measurement of the magnitudes and axes of principal surface curvature in the point neighborhoods and projects the point neighborhoods onto a plane orthogonal to the axis of minor principal curvature. Then, based on the center of a fitted circle to the projected points, we construct a cylindrical shell to enclose the object surface to form grasp affordances. At last, we filter out the grasp affordances that do not satisfy the conditions to fit in our robot hand. 
+
+	Experiments
+
+Objective : Testing localization and grasping algorithm
+
+Experimental Setup
+
+-Fetch Robot
+-2D RGB-D Sensor in head of the robot
+-Algorithm Implementation Language : javascript
+
+Experiment 1 : Series of single object grasp of 10 objects
+
+1.  Robot attempts to grasp the presented object until either the object is grasped or it is pushed out of range
+2.  Run for each object in three different locations.
+3.  Three attempts for each object 
+4.  Measure the number of objects when the robot clears the task
+5.  Define clearing the task as when all of the objects are picked
+4.  Total trial number for each object : 3attempts * 3location = 9trials
+
+Experiment 2 : Series of 10 clear-the-table trials 
+
+Robot attempts to clear five objects
+Run for one location of the objects
+Measure the attempt number when the robot clears the task
+Define clearing the task as when more than 4 out of five objects are picked
+Total trial number : 10trials
+
+
+11/30 goal : Fitting polynomial surface to all of the objects in the pointcloud.
+
+12/14 goal : Contstruct enveloping grasp affordance and perform grasping task using the robot
+
+
