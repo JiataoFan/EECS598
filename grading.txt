@@ -2,14 +2,15 @@
 \n
 Preparatory project: COMPLETED\n
 Paper review/presentation 1: COMPLETED\n
-  paper: Oct 14 - Alexa et al. - Point Set Surfaces... 
+  paper: Oct 14 - Alexa et al. - Point Set Surfaces...
 Paper review/presentation 2: COMPLETED\n
   paper: Nov 9 - ten Pas and Platt  - Handle-like Grasp Affordances...
-Final project proposal: DUE\n
+Final project proposal: COMPLETED\n
   missing: what will be accomplished for Nov 30 intermediate milestone?\n
   comment: the overall proposal looks good.  it is recommended that identification of graspable locations is implemented for Nov 30, with robot control left for the final deadline on Dec 14\n
   note: graded file from Jordan Lee repository\n
-Final project milestone: PENDING\n
-Final project presentation: PENDING\n
+Final project milestone: COMPLETED\n
+Final project presentation: COMPLETED\n
+  project: reproduction of "Localizing Handle-like Grasp Affordances in 3D Point Clouds"\n
 \n
-Final grade: PENDING\n
+Final grade: A\n
